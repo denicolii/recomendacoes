@@ -1,9 +1,8 @@
-# Importando as bibliotecas necessárias
-import pandas as pd
+# Importando as bibliotecas 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 
-# Dados de exemplo: lista de filmes e suas descrições
+# lista de filmes e suas descrições
 filmes = [
     {'titulo': 'Matrix', 'descricao': 'Ficção científica: Um hacker descobre a verdade sobre a realidade.'},
     {'titulo': 'Interestelar', 'descricao': 'Ficção científica: Uma equipe de exploradores viaja através de um buraco de minhoca em busca de um novo lar para a humanidade.'},
@@ -173,7 +172,7 @@ filmes = [
    
 ]
 
-# Criando um DataFrame do pandas com os dados dos filmes
+# DataFrame do pandas com os dados dos filmes
 df = pd.DataFrame(filmes)
 
 # Criando um vetorizador TF-IDF
@@ -182,11 +181,11 @@ tfidf = TfidfVectorizer(stop_words='english')
 # Construindo a matriz TF-IDF
 matriz_tfidf = tfidf.fit_transform(df['descricao'])
 
-# Aplicando o algoritmo K-means para agrupar os filmes em 3 clusters
+#  algoritmo K-means para agrupar os filmes em 3 clusters
 kmeans = KMeans(n_clusters=3, random_state=42)
 clusters = kmeans.fit_predict(matriz_tfidf)
 
-# Adicionando os clusters ao DataFrame
+# Colocando os clusters no DataFrame
 df['cluster'] = clusters
 
 # Função para obter recomendações de filmes com base no cluster
@@ -202,7 +201,7 @@ def recomendar_filmes_por_genero(genero, numero_recomendacoes=3):
 # Solicitar ao usuário que insira um gênero de filme para receber recomendações
 genero_filme_usuario = input("Digite um gênero de filme que você gosta para receber recomendações: ")
 
-# Obter recomendações com base no gênero de filme inserido pelo usuário
+# Puxando recomendações com base no gênero de filme inserido pelo usuário
 recomendacoes = recomendar_filmes_por_genero(genero_filme_usuario)
 if recomendacoes:
     print(f"Recomendações de filmes similares ao gênero '{genero_filme_usuario}':")
